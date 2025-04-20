@@ -5,6 +5,8 @@ server/node_modules/
 
 # === Environment Variables ===
 client/.env
+client/.env.local
+server/.env
 server/.env.local
 
 # === Log Files ===
