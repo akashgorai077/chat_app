@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: ".env.local" });
 import { Server } from "socket.io";
 import http from "http";
 import express from "express";
@@ -18,7 +18,6 @@ const userSocketMap = {
 
 io.on("connection", (socket) => {
   const userId = socket.handshake.query.userId;
-  // console.log("ID >>>>>vvvrvrvvrvrvrvrvvv");
   // console.log(socket.id);
   console.log(socket.handshake.query.userId);
   if (!userId) return;
