@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUserThunk } from "../../store/slice/user/userthunk";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import { Typewriter } from "react-simple-typewriter";
 import toast from "react-hot-toast";
+import chat from "../../assets/chat.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -27,7 +29,6 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    // Show toast if inputs are empty
     if (!loginData.username || !loginData.password) {
       toast.error("Please enter both username and password");
       return;
@@ -47,8 +48,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-800 px-4 py-10 relative">
-      
+    <div className="h-screen w-full overflow-hidden flex flex-col items-center justify-center bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-800 px-4 relative">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 left-1/4 w-20 h-20 bg-white/10 rounded-full animate-pulse"></div>
@@ -56,8 +56,28 @@ const Login = () => {
         <div className="absolute bottom-1/4 left-3/4 w-16 h-16 bg-white/10 rounded-full animate-pulse delay-500"></div>
       </div>
 
+      {/* Heading */}
+      <div className="mb-8 mt-12 text-center z-10">
+        <div className="inline-flex items-center justify-center w-20 h-20 mb-4">
+          <img src={chat} alt="App Logo" className="  " />
+        </div>
+        <h1 className="text-3xl sm:text-5xl font-bold text-white mb-2">
+          <Typewriter
+            words={["Welcome to WeChat"]}
+            loop={false}
+            cursor
+            cursorStyle="|"
+            typeSpeed={150}
+            deleteSpeed={50}
+            delaySpeed={5000}
+          />
+        </h1>
+        <p className="text-white/70 text-lg">
+          Connect, chat, and collaborate seamlessly
+        </p>
+      </div>
+
       <div className="flex flex-col lg:flex-row items-center justify-between w-full max-w-7xl gap-8 lg:gap-16 flex-1 z-10">
-        
         {/* Lottie Animation */}
         <div className="hidden lg:flex relative w-1/2 items-end justify-center">
           <DotLottieReact
@@ -111,11 +131,8 @@ const Login = () => {
             </label>
 
             {/* Forgot Password */}
-            <div className="text-right mb-6">
-              <Link
-                to="/forgot-password"
-                className="text-sm text-transparent "
-              >
+            <div className="text-right mb-3">
+              <Link to="/forgot-password" className="text-sm text-transparent ">
                 Forgot Password?
               </Link>
             </div>
