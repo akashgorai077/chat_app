@@ -20,7 +20,7 @@ const MessageContainer = () => {
     <>
       {!selectedUser ? (
         <div className="w-full flex items-center justify-center flex-col gap-5 h-full">
-          <h2 className="text-2xl font-semibold">Welcome to GUP SHUP</h2>
+          <h2 className="text-2xl font-semibold">Welcome to We-Chat</h2>
           <p className="text-xl">Please select a person to continue your chat!!</p>
         </div>
       ) : (
