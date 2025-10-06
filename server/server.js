@@ -353,7 +353,7 @@ app.use(
       if (allowedOrigins.includes(origin)) {
         return callback(null, true);
       } else {
-        console.error("❌ CORS blocked for:", origin);
+        console.error(" CORS blocked for:", origin);
         return callback(new Error("Not allowed by CORS"));
       }
     },
