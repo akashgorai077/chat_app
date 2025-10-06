@@ -26,8 +26,8 @@ export const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //Login user
-    builder.addCase(loginUserThunk.pending, (state, action) => {
+    // LOGIN USER
+    builder.addCase(loginUserThunk.pending, (state) => {
       state.buttonLoading = true;
     });
     builder.addCase(loginUserThunk.fulfilled, (state, action) => {
@@ -35,29 +35,29 @@ export const userSlice = createSlice({
       state.isAuthenticated = true;
       state.buttonLoading = false;
     });
-    builder.addCase(loginUserThunk.rejected, (state, action) => {
+    builder.addCase(loginUserThunk.rejected, (state) => {
       state.buttonLoading = false;
     });
 
-    //Register user
-    builder.addCase(registerUserThunk.pending, (state, action) => {
+    // REGISTER USER
+    builder.addCase(registerUserThunk.pending, (state) => {
       state.buttonLoading = true;
     });
-    builder.addCase(registerUserThunk.fulfilled, (state, action) => {
-      state.userProfile = action.payload?.responseData?.user;
-      //   console.log(action.payload);
-      state.isAuthenticated = true;
+    builder.addCase(registerUserThunk.fulfilled, (state) => {
+      // Do NOT set isAuthenticated here
+      state.userProfile = null;
+      state.isAuthenticated = false; // user must login after signup
       state.buttonLoading = false;
     });
-    builder.addCase(registerUserThunk.rejected, (state, action) => {
+    builder.addCase(registerUserThunk.rejected, (state) => {
       state.buttonLoading = false;
     });
 
-    //Logout user
-    builder.addCase(logoutUserThunk.pending, (state, action) => {
+    // LOGOUT USER
+    builder.addCase(logoutUserThunk.pending, (state) => {
       state.buttonLoading = true;
     });
-    builder.addCase(logoutUserThunk.fulfilled, (state, action) => {
+    builder.addCase(logoutUserThunk.fulfilled, (state) => {
       state.userProfile = null;
       state.selectedUser = null;
       state.otherUsers = null;
@@ -65,34 +65,32 @@ export const userSlice = createSlice({
       state.buttonLoading = false;
       localStorage.clear();
     });
-    builder.addCase(logoutUserThunk.rejected, (state, action) => {
+    builder.addCase(logoutUserThunk.rejected, (state) => {
       state.buttonLoading = false;
     });
 
-    //get User Profile
-    builder.addCase(getUserProfileThunk.pending, (state, action) => {
-      state.screenLoading = true; // Indicate loading state
+    // GET USER PROFILE
+    builder.addCase(getUserProfileThunk.pending, (state) => {
+      state.screenLoading = true;
     });
     builder.addCase(getUserProfileThunk.fulfilled, (state, action) => {
+      state.userProfile = action.payload?.responseData;
       state.isAuthenticated = true;
       state.screenLoading = false;
-      //   console.log(action.payload);
-      state.userProfile = action.payload?.responseData; // ✅ Update userProfile
     });
-    builder.addCase(getUserProfileThunk.rejected, (state, action) => {
+    builder.addCase(getUserProfileThunk.rejected, (state) => {
       state.screenLoading = false;
     });
 
-    // get other users
-    builder.addCase(getOtherUsersThunk.pending, (state, action) => {
+    // GET OTHER USERS
+    builder.addCase(getOtherUsersThunk.pending, (state) => {
       state.screenLoading = true;
     });
     builder.addCase(getOtherUsersThunk.fulfilled, (state, action) => {
-      state.screenLoading = false;
       state.otherUsers = action.payload?.responseData;
-      //   console.log(action.payload);
+      state.screenLoading = false;
     });
-    builder.addCase(getOtherUsersThunk.rejected, (state, action) => {
+    builder.addCase(getOtherUsersThunk.rejected, (state) => {
       state.screenLoading = false;
     });
   },

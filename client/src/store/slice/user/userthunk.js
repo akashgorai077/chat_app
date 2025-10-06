@@ -31,7 +31,7 @@ export const registerUserThunk = createAsyncThunk(
         password,
         gender,
       });
-      toast.success("Account created successfully");
+      // toast.success("Account created successfully");
       return response.data;
     } catch (error) {
       console.log(error);
